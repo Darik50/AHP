@@ -10,7 +10,10 @@ namespace AHP
     {
         public string[] goal;
         public Dictionary<string, double> criteriaResult;
+        public double os;
         public Dictionary<string, Dictionary<string, double>> altResult;
+        public Dictionary<string, double> osAlt;
         public Dictionary<string, double> finalResult;
+        public double oos;
     }
 }

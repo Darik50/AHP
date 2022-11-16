@@ -27,43 +27,46 @@ namespace AHP
             {14,1.57},
             {15,1.59}
         };
-        public static double[] Count(double[,] pairwise)
+        public static resNvp Count(double[,] pairwise)
         {
 
-            double[] averages = new double[pairwise.GetUpperBound(0) + 1];
-            // Для каждой строки рассчитаем среднее геометрическое
-            for(int i = 0; i < pairwise.GetUpperBound(0) + 1; i++)
+            double[] averages = new double[pairwise.GetUpperBound(1) + 1];
+            for(int i = 0; i < pairwise.GetUpperBound(1) + 1; i++)
+            {
+                double[] str = new double[pairwise.GetUpperBound(1) + 1];
+                for (int j = 0; j < pairwise.GetUpperBound(0) + 1; j++)
+                {
+                    str[j] = pairwise[j, i];
+                }
+                double summ = Summ(str);
+                averages[i] = summ;
+            }
+            double averagesSumm = Summ(averages);
+            double[] nvpAverages = new double[pairwise.GetUpperBound(0) + 1];
+            for (int i = 0; i < pairwise.GetUpperBound(0) + 1; i++)
             {
                 double[] str = new double[pairwise.GetUpperBound(1) + 1];
                 for (int j = 0; j < pairwise.GetUpperBound(1) + 1; j++)
                 {
-                    str[j] = pairwise[i, j];
+                    str[j] = pairwise[i, j] / averages[j];
                 }
-                double mult = Mult(str);
+                double summ = Summ(str);
                 double count = str.Length;
-                double average = Average(mult, count);
-                averages[i] = average;
+                double average = Average(summ, count);
+                nvpAverages[i] = average;
             }
-            // Получаем сумму средних геометрических
-            double averagesSumm = Summ(averages);
-            // НВП для каждой строки
-            double[] nvpAverages = new double[pairwise.GetUpperBound(0) + 1];
-            // Для каждой строки получаем НВП
-            for(int i = 0; i < averages.Length; i++)
+            resNvp res = new resNvp();
+            res.nvpAverages = nvpAverages;
+            res.os = Check(pairwise, nvpAverages);
+
+            if (res.os < 0.10)
             {
-                var nvp = Nvp(averagesSumm, averages[i]);
-                nvpAverages[i] =nvp;
-            }
-            if(Check(pairwise, nvpAverages))
-            {
-                return nvpAverages;
+                return res;
             }
             else
             {
                 Console.WriteLine("Consistency violation");
-                Console.ReadLine();
-                Environment.Exit(0);
-                return nvpAverages;
+                return res;
             }
         }
         static double Summ(double[] str)
@@ -75,7 +78,7 @@ namespace AHP
             }
             return summ;
         }
-        public static bool Check(double[,] pairwise, double[] nvpAverages)
+        public static double Check(double[,] pairwise, double[] nvpAverages)
         {
             double[] A = new double[pairwise.GetUpperBound(1) + 1];
             for (int i = 0; i < pairwise.GetUpperBound(0) + 1; i++)
@@ -91,22 +94,16 @@ namespace AHP
                 A[i] = A[i] * nvpAverages[i];
             }
             double lim = Summ(A);
-            // Рассчитываем индекс согласованности
             double confirmationIndex = (lim - nvpAverages.Length) / (nvpAverages.Length - 1);
-            // Рассчитываем отношение согласованности
             double resutlConfirmation = confirmationIndex / randomConfirmation[nvpAverages.Length];
-            if (resutlConfirmation < 0.10) 
-            { 
-                return true;
-            }
-            return false;
+            return resutlConfirmation;
         }
         static double Mult(double[] str)
         {
             double mult = 1;
             for(int i = 0; i < str.Length; i++)
             {
-                mult *= str[i];
+                mult += str[i];
             }
             return mult;
         }
@@ -116,7 +113,7 @@ namespace AHP
         }
         static double Average(double mult, double count)
         {
-            return Math.Pow(mult, 1.0 / count);
+            return mult / count;
         }
     }
 }
