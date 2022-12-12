@@ -8,7 +8,7 @@ namespace AHP
 {
     internal class Program
     {
-        public static string path = @"D:\Darik\МПР\Курсач\Ввод4.txt";
+        public static string path = @"Path";
         static void Main(string[] args)
         {
             ResultAHP res = Conclusion.start(path);
