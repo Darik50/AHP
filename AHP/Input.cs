@@ -9,7 +9,6 @@ namespace AHP
 {
     internal class Input
     {
-        public static string path = @"D:\Darik\МПР\Курсач\Ввод.txt";
         //Чтение исходных данных из файла
         public static DataAHP InputData (string path)
         {
