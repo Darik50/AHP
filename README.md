@@ -2,7 +2,7 @@
 
 Peter the Great Saint-Petersburg Polytechnic University
 
-The report: «Implementation of T. Saaty's Hierarchy Analysis Method».
+The report: «Implementation of T. Saaty's Analytic hierarchy process».
 
 Advisors:   
 Assoc. prof, Cand. of Tech. Sci. Alexander Shchukin  
