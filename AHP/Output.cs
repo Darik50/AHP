@@ -8,6 +8,7 @@ namespace AHP
 {
     internal class Output
     {
+        //Вывод матриц в консоль
         public static void printMatrix(Dictionary<string, double> dict)
         {
             int len = 0;

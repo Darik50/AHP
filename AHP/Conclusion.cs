@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace AHP
 {
+    //Класс для вычисления окончательных результатов на основе полученных весов
     internal class Conclusion
     {
+        //Таблица значений СС
         public static Dictionary<int, double> randomConfirmation = new Dictionary<int, double>
         {
             {1,0},
@@ -26,6 +28,7 @@ namespace AHP
             {14,1.57},
             {15,1.59}
         };
+        //Запись итоговых результатов в поля класса ResultAHP
         public static ResultAHP start(string path)
         {
             DataAHP data = Input.InputData(path);

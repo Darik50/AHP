@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AHP
 {
+    //Класс для записи исходных данных
     internal class DataAHP
     {
         public string[] goal;

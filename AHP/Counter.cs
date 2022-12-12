@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace AHP
 {
+    //Класс для вычесления результатов для каждого из отдельных элементов
     internal class Counter
     {
+        //Таблица значений СС
         public static Dictionary<int,double> randomConfirmation = new Dictionary<int, double> 
         {
             {1,0},
@@ -27,9 +29,10 @@ namespace AHP
             {14,1.57},
             {15,1.59}
         };
+        //Запись итоговых результатов в поля класса resNvp
         public static resNvp Count(double[,] pairwise)
         {
-
+            //расчет суммы столбцов
             double[] averages = new double[pairwise.GetUpperBound(1) + 1];
             for(int i = 0; i < pairwise.GetUpperBound(1) + 1; i++)
             {
@@ -41,34 +44,28 @@ namespace AHP
                 double summ = Summ(str);
                 averages[i] = summ;
             }
-            double averagesSumm = Summ(averages);
+            //расчет весов 
             double[] nvpAverages = new double[pairwise.GetUpperBound(0) + 1];
             for (int i = 0; i < pairwise.GetUpperBound(0) + 1; i++)
             {
                 double[] str = new double[pairwise.GetUpperBound(1) + 1];
+                //нормировка
                 for (int j = 0; j < pairwise.GetUpperBound(1) + 1; j++)
                 {
                     str[j] = pairwise[i, j] / averages[j];
                 }
-                double summ = Summ(str);
+                    double summ = Summ(str);
                 double count = str.Length;
                 double average = Average(summ, count);
                 nvpAverages[i] = average;
             }
             resNvp res = new resNvp();
             res.nvpAverages = nvpAverages;
+            //расчет относительной согласованности
             res.os = Check(pairwise, nvpAverages);
-
-            if (res.os < 0.10)
-            {
-                return res;
-            }
-            else
-            {
-                Console.WriteLine("Consistency violation");
-                return res;
-            }
+            return res;
         }
+        //Сумматор
         static double Summ(double[] str)
         {
             double summ = 0;
@@ -78,6 +75,7 @@ namespace AHP
             }
             return summ;
         }
+        //Расчет индекса согласованности и на его основе вычисление относительной согласованности
         public static double Check(double[,] pairwise, double[] nvpAverages)
         {
             double[] A = new double[pairwise.GetUpperBound(1) + 1];
@@ -98,19 +96,7 @@ namespace AHP
             double resutlConfirmation = confirmationIndex / randomConfirmation[nvpAverages.Length];
             return resutlConfirmation;
         }
-        static double Mult(double[] str)
-        {
-            double mult = 1;
-            for(int i = 0; i < str.Length; i++)
-            {
-                mult += str[i];
-            }
-            return mult;
-        }
-        static double Nvp(double summ, double value)
-        {
-            return value / summ;
-        }
+        //Вычисление среднего значения
         static double Average(double mult, double count)
         {
             return mult / count;

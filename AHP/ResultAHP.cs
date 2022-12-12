@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AHP
 {
+    //Класс для записи результатов
     internal class ResultAHP
     {
         public string[] goal;
