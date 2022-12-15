@@ -64,6 +64,12 @@ I. A. Salimgareev
 
 [Input1](AHP/Input1.txt)
 
+[Input2](AHP/Input2.txt)
+
+[Input3](AHP/Input3.txt)
+
+[Input4](AHP/Input4.txt)
+
 ### Список использованных источников (References)
 
 Коробов В. Б., Тутыгин А. Г. Проблемы использования метода анализа иерархий и пути их решения // Экономика и управление — 2016 — №8.
