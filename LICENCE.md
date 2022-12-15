@@ -2,6 +2,8 @@ MIT License
 
 Copyright (c) 2022 Ildar Salimgareev
 
+The description of the mathematical methods of decision making is with the Copyright (c) of Dr. L.Saaty see, please, the textbook in the references (later - the textbook). The appropriate authors of the implemented methods, that are mentioned in the textbook, keep theirs authorships.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
